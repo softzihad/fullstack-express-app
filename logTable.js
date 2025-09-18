@@ -16,7 +16,8 @@ async function viewAllProducts() {
       return { id, title, artist, year, stock }
     })
 
-    console.table(products) 
+    //console.table(displayItems) 
+    console.table(products) // all column display of products table
   } catch (err) {
     console.error('Error fetching products:', err.message)
   } finally {
