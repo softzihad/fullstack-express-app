@@ -23,6 +23,11 @@ async function createTable() {
         stock INTEGER
         )
     `)
+
+    // close the database
+    await db.close()
+    console.log('Table created')
+
 }
 
 createTable()
