@@ -14,8 +14,20 @@ async function seedTable() {
   
 
     try {
-        
+        // insert multiple records into the products table
+        await db.exec('BEGIN TRANSACTION')
 
+        for (const { title, artist, price, image, year, genre, stock } of vinyl) {
+
+        await db.run(`
+            INSERT INTO products (title, artist, price, image, year, genre, stock)
+            VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [title, artist, price, image, year, genre, stock]
+            )
+
+        }
+
+        await db.exec('COMMIT')
         console.log('All records inserted successfully.')
     } catch (err) {
 
