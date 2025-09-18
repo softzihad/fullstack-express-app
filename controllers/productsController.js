@@ -21,7 +21,19 @@ export async function getProducts(req, res) {
 }
 
 export async function getGenres(req, res) {
-    console.log("Fetching genres...");
-    res.send("List of genres");
+
+  try {
+
+    const db = await getDBConnection()
+
+    const genreRows = await db.all('SELECT DISTINCT genre FROM products')
+    const genres = genreRows.map(row => row.genre)
+    res.json(genres)
+
+  } catch (err) {
+
+    res.status(500).json({error: 'Failed to fetch genres', details: err.message})
+
+  }
 }
     
